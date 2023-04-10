@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Digital Clock</title>
+		<style>
+			.clock {
+				position: absolute;
+				top: 40%;
+				left: 40%;
+				font-size: 65px;
+				font-family: sans-serif;
+				letter-spacing: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="clock" id="clock"></div>
+	</body>
+	<script>
+		function GetTime() {
+			var mydate = new Date();
+			var hour = mydate.getHours(), minute = mydate.getMinutes(), second = mydate.getSeconds();
+			var ap = "AM";
+			var ob = document.getElementById("clock");
+			if (7 <= hour && hour <= 7) {
+				document.body.style.backgroundColor = "white";
+				ob.style.color = "black";
+			} else {
+				document.body.style.backgroundColor = "black";
+				ob.style.color = "white";
+			}
+			if (hour >= 12) {
+				hour -= 12;
+				ap = "PM";
+			}
+			if (hour == 0) hour = 12;
+			if (minute < 10) minute = '0' + minute;
+			if (second < 10) second = '0' + second;
+			ob.innerHTML = hour + ":" + minute + ":" + second + " " + ap;
+		}
+		setInterval("GetTime();", 1000);
+	</script>
+</html>

@@ -2,7 +2,19 @@
 <html>
 	<head>
 		<!-- to be continued -->
-		<title>The homepage of Charlie</title>
+		<title>The Website of Charlie</title>
+		<script>
+			function sleep (time) {
+  				return new Promise((resolve) => setTimeout(resolve, time));
+			}
+
+			window.onfocus = function() {
+				document.title = "Welcome back!";
+				sleep(1000).then(() => {
+					document.title = "The Website of Charlie";
+				});
+			}
+		</script>
 	</head>
 	<frameset cols="130, *" frameborder="1">
 		<frame name="contents" src="content.html"></frame>
