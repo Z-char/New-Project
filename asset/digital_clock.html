@@ -11,24 +11,94 @@
 				font-family: sans-serif;
 				letter-spacing: 5px;
 			}
+			.btnday {
+				border-radius: 12px;
+				-webkit-transition-duration: 0.4s;
+				transition-duration: 0.4s;
+				background-color: black;
+				color: white;
+				text-align: center;
+				padding: 6px 8px;
+			}
+			.btnday:hover {
+				background-color: purple;
+				color: black;
+			}
+			.btnnight {
+				border-radius: 12px;
+				-webkit-transition-duration: 0.4s;
+				transition-duration: 0.4s;
+				background-color: white;
+				color: black;
+				text-align: center;
+				padding: 6px 8px;
+			}
+			.btnnight:hover {
+				background-color: purple;
+				color: black;
+			}
 		</style>
 	</head>
 	<body>
+		<button onclick="Change()" id="btn1"></button>
+		<button onclick="Origin()" id="btn2"></button>
 		<div class="clock" id="clock"></div>
 	</body>
 	<script>
+		var Cusmode = false;
+		var time = "Day";
+
+		function setDay() { // 将现在的时间设置为白天
+			time = "Day";
+			let ob = document.getElementById("clock");
+			document.body.style.backgroundColor = "white";
+			ob.style.color = "black";
+
+			ob = document.getElementById("btn1");
+			ob.className = "btnday";
+			ob.innerHTML = "dark mode";
+
+			ob = document.getElementById("btn2");
+			ob.className = "btnday";
+			ob.innerHTML = "auto mode";
+		}
+		function setNight() {
+			time = "Night";
+			let ob = document.getElementById("clock");
+			document.body.style.backgroundColor = "black";
+			ob.style.color = "white";
+
+			ob = document.getElementById("btn1");
+			ob.className = "btnnight";
+			ob.innerHTML = "light mode";
+
+			ob = document.getElementById("btn2");
+			ob.className = "btnnight";
+			ob.innerHTML = "auto mode";
+		}
+		function Change() {
+			Cusmode = true;
+			if (time == "Day") setNight();
+			else setDay();
+		}
+		function Origin() {
+			Cusmode = false;
+			GetTime();
+		}
 		function GetTime() {
-			var mydate = new Date();
-			var hour = mydate.getHours(), minute = mydate.getMinutes(), second = mydate.getSeconds();
-			var ap = "AM";
-			var ob = document.getElementById("clock");
-			if (7 <= hour && hour <= 7) {
-				document.body.style.backgroundColor = "white";
-				ob.style.color = "black";
-			} else {
-				document.body.style.backgroundColor = "black";
-				ob.style.color = "white";
-			}
+			let mydate = new Date();
+			let hour = mydate.getHours(), minute = mydate.getMinutes(), second = mydate.getSeconds();
+			let ap = "AM";
+			let ob = document.getElementById("clock");
+			
+			if (!Cusmode) {
+				if (7 <= hour && hour <= 19) {
+					setDay();
+					
+				} else {
+					setNight();
+				}
+			} // or do nothing
 			if (hour >= 12) {
 				hour -= 12;
 				ap = "PM";

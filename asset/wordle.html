@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			background-color: black;
+		}
+		.col1, .col2, .col3, .col4, .col5 {
+			border-style: solid;
+			border-width: 5px;
+			border-color: purple;
+			display: inline-block;
+			height: 100px;
+			width: 100px;
+			color: white;
+			text-align: center;
+			font-size: 50px;
+			vertical-align: top;
+			margin-bottom: 10px;
+		}
+		.col1, .col2, .col3, .col4{
+			margin-right: 10px;
+		}
+		.ins > p {
+			display: inline-block;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="game" width="590px">
+		<div class="row1" width="590px">
+			<div class="col1">?
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+			</div>
+		</div>
+
+		<div class="row2" width="590px">
+			<div class="col1">
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+		</div>
+
+		<div class="row3" width="590px">
+			<div class="col1">
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+		</div>
+
+		<div class="row4" width="590px">
+			<div class="col1">
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+		</div>
+
+		<div class="row5" width="590px">
+			<div class="col1">
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+		</div>
+
+		<div class="row6" width="590px">
+			<div class="col1">
+			</div>
+			<div class="col2">
+			</div>
+			<div class="col3">
+			</div>
+			<div class="col4">
+			</div>
+			<div class="col5">
+		</div>
+	</div>
+	<div class="ins">
+		<p>
+			<b>
+				Instruction:
+			</b>
+			<br/>
+			You need to guess a word in six times.
+			Write a word containing five letters then enter 'enter'.
+			Gold means 'correct', silver means 'answer contains this letter but it is in another position', or it means 'answer does not include this letter'(you do not need to enter a real word).
+			Good luck!
+		</p>
+		<a href="javascript:location.reload();">refresh</a>
+	</div>
+</body>
+
+<script>
+	var row = 1, col = 1;
+	var arr = new Array(6).fill(0);
+	var Ans = ["", "A", "P", "P", "L", "E"];
+	const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+	function Fill(r, c, con) {
+		r = "row" + r, c = "col" + c;
+		let ob = document.getElementsByClassName(r);
+		ob = ob[0];
+		ob = ob.getElementsByClassName(c);
+		ob = ob[0];
+		ob.innerHTML = con;
+		// alert(ob.innerHTML);
+	}
+	function CC(r, c, col) {
+		r = "row" + r, c = "col" + c;
+		let ob = document.getElementsByClassName(r);
+		ob = ob[0];
+		ob = ob.getElementsByClassName(c);
+		ob = ob[0];
+		ob.style.background = col;
+		// alert(ob.innerHTML);
+	}
+	function display(r) {
+		let dict = {};
+		for (let x = 0; x < 26; ++x) {
+			dict[alphabet[x]] = 0;
+		}
+
+		let cnt = 0;
+		for (let i = 1; i <= 5; ++i) {
+			if (arr[i] == Ans[i]) {
+				CC(r, i, "gold");
+				++cnt;
+			} else {
+				dict[Ans[i]] += 1;
+			}
+		}
+		for (let i = 1; i <= 5; ++i) {
+			if (arr[i] != Ans[i]) {
+				if (dict[arr[i]]) {
+					CC(r, i, "silver");
+					dict[arr[i]] -= 1;
+				}
+			}
+		}
+		if (cnt == 5) {
+			alert("Congratulation!");
+			row = 7, col = 1;
+		}
+	}
+	window.onkeydown = function(evt) {
+		let k = evt.key;
+		if (k == "Backspace") {
+			if (col > 1) { // 只有可以退格才允许退格
+				col -= 1;
+				Fill(row, col, "");
+			}
+		} else if (k == "Enter") {
+			if (col == 6) { // 只有这一行输入满了才可以输入单词
+				display(row); // 展示这一行的结果
+				++row, col = 1; // 进入下一行
+			}
+		} else {
+			let reg = /^[a-zA-Z]$/;
+			if (row <= 6 && col <= 5 && reg.test(k)) { // 是一个字母并且可以填
+				// alert(typeof k);
+				k = k.toUpperCase();
+				arr[col] = k;
+				Fill(row, col, k);
+				++col;
+			}
+		}
+	}
+</script>
+
+</html>
