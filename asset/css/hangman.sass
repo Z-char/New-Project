@@ -1,0 +1,123 @@
+$start: 1;
+// set 0 to check div border and 1 not to.
+@font-face {
+  font-family: "BombshellPro";
+  src: url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.eot");
+  src: url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.svg#BombshellPro")
+      format("svg");
+}
+/*use at-rules to set a new font for title*/
+
+@import url("https://fonts.cdnfonts.com/css/handwriting");
+/*use import to import a new font for text*/
+
+$title-font: "BombshellPro";
+$text-font: "Handwriting";
+
+@mixin check($start) {
+  @if $start == 0 {
+    border-style: solid;
+  }
+}
+@mixin roundcorners($radius) {
+  border-style: solid;
+  border-radius: $radius;
+}
+@mixin opacity($o: 0.4) {
+  opacity: $o;
+}
+div {
+  @include check($start);
+}
+
+body {
+  display: grid;
+  text-align: center;
+  margin: 0px;
+}
+$height: 16vh;
+#title, #alphabar, #possibleclue, #guess, #lives, #buttons {
+  height: $height;
+  margin: 0px;
+  padding: 0px;
+}
+$Hsize: 20px;
+$Hfamily: cursive;
+#title {
+  font: {
+    size: $Hsize;
+    family: $Hfamily;
+  }
+}
+#buttons > div {
+  @include roundcorners(5px);
+  background: white;
+  color: black;
+  border: solid 1px black;
+  cursor: pointer;
+  font-family: $text-font;
+  font-size: 1.8em;
+  padding: 18px 10px;
+  width: 180px;
+  transition: all 0.5s ease-out;
+  &:hover {
+    background: black;
+    border: solid 1px black;
+    color: white;
+  }
+}
+#reset {
+  grid-area: reset;
+}
+#hint {
+  grid-area: hint;
+}
+#buttons {
+  display: grid;
+  grid-template-areas:
+    'reset blank hint';
+  margin: 0 20vw;
+  place-items: center;
+}
+.ListItem {
+  @include roundcorners(5px);
+  border: none;
+  display: flex;
+  overflow: hidden;
+  background: linear-gradient(to top right, #00bd56, #f9fd50);
+  height: 20px;
+  width: 15px;
+  padding: 5px;
+  margin: 0px 5px;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: translateY(-5px) scale(1.15);
+    box-shadow: 1.5px 1.5px 5px 1.5px;
+  }
+  &.active {
+     @include opacity;
+  }
+}
+
+.guessblock {
+  display: flex;
+  overflow: hidden;
+  font-size: 25px;
+  height: 30px;
+  width: 20px;
+  padding: 5px;
+  margin: 0px 5px;
+  transition: all 0.3s ease-out;
+  border-bottom: 1px solid;
+}
+.guessdash {
+  ;
+}

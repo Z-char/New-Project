@@ -1,0 +1,91 @@
+@import url("https://fonts.cdnfonts.com/css/handwriting");
+@font-face {
+  font-family: "BombshellPro";
+  src: url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.eot");
+  src: url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.woff") format("woff"), url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/5a970824f5f2fda1d53e42fbb77369dd.svg#BombshellPro") format("svg");
+}
+/*use at-rules to set a new font for title*/
+/*use import to import a new font for text*/
+body {
+  display: grid;
+  text-align: center;
+  margin: 0px;
+}
+
+#title, #alphabar, #possibleclue, #guess, #lives, #buttons {
+  height: 16vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+#title {
+  font-size: 20px;
+  font-family: cursive;
+}
+
+#buttons > div {
+  border-style: solid;
+  border-radius: 5px;
+  background: white;
+  color: black;
+  border: solid 1px black;
+  cursor: pointer;
+  font-family: "Handwriting";
+  font-size: 1.8em;
+  padding: 18px 10px;
+  width: 180px;
+  transition: all 0.5s ease-out;
+}
+#buttons > div:hover {
+  background: black;
+  border: solid 1px black;
+  color: white;
+}
+
+#reset {
+  grid-area: reset;
+}
+
+#hint {
+  grid-area: hint;
+}
+
+#buttons {
+  display: grid;
+  grid-template-areas: "reset blank hint";
+  margin: 0 20vw;
+  place-items: center;
+}
+
+.ListItem {
+  border-style: solid;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  overflow: hidden;
+  background: linear-gradient(to top right, #00bd56, #f9fd50);
+  height: 20px;
+  width: 15px;
+  padding: 5px;
+  margin: 0px 5px;
+  transition: all 0.3s ease-out;
+}
+.ListItem:hover {
+  transform: translateY(-5px) scale(1.15);
+  box-shadow: 1.5px 1.5px 5px 1.5px;
+}
+.ListItem.active {
+  opacity: 0.4;
+}
+
+.guessblock {
+  display: flex;
+  overflow: hidden;
+  font-size: 25px;
+  height: 30px;
+  width: 20px;
+  padding: 5px;
+  margin: 0px 5px;
+  transition: all 0.3s ease-out;
+  border-bottom: 1px solid;
+}
